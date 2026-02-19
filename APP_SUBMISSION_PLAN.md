@@ -224,49 +224,87 @@ Multiplayer FaceTime Fun
 **iPhone 15 Pro Max (6.7" display) - REQUIRED**
 - [ ] 1290 x 2796 pixels (portrait)
 
-**Screenshot Strategy:**
+**Screenshot Strategy (Benefit-Focused):**
 
-**Screenshot 1 - Hero Shot (MOST IMPORTANT)**
-- Visual: Gameplay with multiple players and red envelopes
-- Text Overlay: "Grab Red Envelopes with Friends!"
-- Subtext: "SharePlay Multiplayer Fun"
-- Goal: Show core gameplay immediately
-- ASO Keywords visible: "Red Envelopes", "SharePlay"
+**Screenshot 1 - Connection & Joy (MOST IMPORTANT)**
+- Visual: Gameplay with multiple players and red envelopes flying
+- **Main Caption:** "Turn Video Calls Into Fun!"
+- **Subtitle:** "Make Every FaceTime Memorable"
+- **User Benefit:** Transforms boring video calls into exciting shared experiences
+- **Emotion:** Joy, Connection
+- ASO Keywords: "FaceTime", "Fun"
 
-**Screenshot 2 - Key Feature**
-- Visual: SharePlay connection screen or lobby
-- Text Overlay: "Start SharePlay in Seconds"
-- Subtext: "Just Start a FaceTime Call"
-- Goal: Show ease of use
-- ASO Keywords: "SharePlay", "FaceTime"
+**Screenshot 2 - Easy Fun (Remove Friction)**
+- Visual: Simple lobby screen with players joining
+- **Main Caption:** "Join in Seconds"
+- **Subtitle:** "No Setup • Everyone Can Play"
+- **User Benefit:** Instant fun without complicated rules or long tutorials
+- **Emotion:** Relief, Accessibility
+- ASO Keywords: "Easy", "Quick"
 
-**Screenshot 3 - Cultural Hook**
-- Visual: Beautiful red envelopes floating
-- Text Overlay: "Lucky Hongbao Tradition"
-- Subtext: "Celebrate Chinese New Year"
-- Goal: Appeal to cultural audience
-- ASO Keywords: "Hongbao", "Chinese New Year"
+**Screenshot 3 - Bring People Together**
+- Visual: Active gameplay with multiple player cards visible
+- **Main Caption:** "Laugh Together, Anywhere"
+- **Subtitle:** "Connect Family Across Any Distance"
+- **User Benefit:** Quality time with loved ones regardless of location
+- **Emotion:** Warmth, Togetherness
+- ASO Keywords: "Family", "Together"
 
-**Screenshot 4 - Social Proof**
-- Visual: Multiple player cards with scores
-- Text Overlay: "2-6 Players, Real-Time"
-- Subtext: "Compete with Family & Friends"
-- Goal: Emphasize multiplayer
-- ASO Keywords: "Multiplayer", "Family"
+**Screenshot 4 - Cultural Connection (for CNY audience)**
+- Visual: Beautiful red envelopes with golden accents
+- **Main Caption:** "Share Your Heritage"
+- **Subtitle:** "Hongbao Tradition for Modern Families"
+- **User Benefit:** Pass down cultural traditions to younger generation remotely
+- **Emotion:** Pride, Nostalgia
+- ASO Keywords: "Hongbao", "Tradition", "Chinese New Year"
 
-**Screenshot 5 - Winning Moment**
-- Visual: Results screen with fireworks
-- Text Overlay: "Celebrate Your Wins!"
-- Subtext: "Fireworks & Confetti Effects"
-- Goal: Show excitement and payoff
-- Emotion: Joy
+**Screenshot 5 - Victory & Excitement**
+- Visual: Winner celebration with fireworks and confetti
+- **Main Caption:** "Feel the Thrill of Victory!"
+- **Subtitle:** "Epic Celebrations for Big Wins"
+- **User Benefit:** Experience genuine excitement and bragging rights
+- **Emotion:** Exhilaration, Achievement
+- ASO Keywords: "Win", "Celebrate"
 
-**Screenshot 6 - Trust Builder**
-- Visual: Clean UI or welcome screen
-- Text Overlay: "100% Free Forever"
-- Subtext: "No Ads • No In-App Purchases"
-- Goal: Remove friction, build trust
-- Keywords: "Free"
+**Screenshot 6 - Stress-Free Entertainment**
+- Visual: Clean interface or results screen with happy players
+- **Main Caption:** "Pure Fun, Zero Strings"
+- **Subtitle:** "Free Forever • No Ads • No Tricks"
+- **User Benefit:** Guilt-free entertainment without hidden costs or interruptions
+- **Emotion:** Trust, Relaxation
+- ASO Keywords: "Free", "No Ads"
+
+**Alternative Captions (A/B Test Options):**
+
+**For Screenshot 1 (Hero):**
+- "Stop Boring Video Calls" / "Start Having Real Fun"
+- "Game Night on FaceTime" / "Any Call Can Be a Party"
+- "Make Your Family Smile" / "From Anywhere in the World"
+
+**For Screenshot 2 (Ease of Use):**
+- "Grandma Can Play Too!" / "Seriously, It's That Easy"
+- "No Rules to Learn" / "Just Tap and Laugh"
+- "Ready in 10 Seconds" / "Everyone Joins Instantly"
+
+**For Screenshot 3 (Connection):**
+- "Miss Your Friends?" / "Bring Them Together Tonight"
+- "Distance Doesn't Matter" / "Joy Is Just a Call Away"
+- "Create Memories Together" / "Even When You're Apart"
+
+**For Screenshot 4 (Cultural):**
+- "Keep Traditions Alive" / "No Matter Where You Live"
+- "Teach Kids About Hongbao" / "Through Play They Love"
+- "Lunar New Year Magic" / "Right On Your Phone"
+
+**For Screenshot 5 (Victory):**
+- "Bragging Rights Included!" / "Who's the Fastest Grabber?"
+- "Watch Them Celebrate" / "Your Win, Their Joy Too"
+- "That Winning Feeling" / "Again and Again"
+
+**For Screenshot 6 (Trust):**
+- "Really, Truly Free" / "No Catch, No Ads, Ever"
+- "Your Privacy Protected" / "Zero Data Collection"
+- "Just Fun. Nothing Else." / "The Way Games Should Be"
 
 **iPhone 8 Plus (5.5" display) - REQUIRED**
 - [ ] 1242 x 2208 pixels (portrait)
@@ -278,12 +316,114 @@ Multiplayer FaceTime Fun
 - Photoshop or Affinity Photo
 - Screenshot Creator (online tool)
 
+**Why Benefit-Focused Captions Work:**
+- ✅ Users ask "What's in it for ME?" - answer directly
+- ✅ Emotional connection > Feature list
+- ✅ Shows outcome, not just product
+- ✅ "Make friends laugh" beats "Multiplayer support"
+- ✅ "Free forever" beats "No IAP"
+- ✅ Benefits = higher conversion rate (20-40% increase)
+
+**Caption Psychology Framework:**
+
+**Problem → Solution:**
+- Screenshot 1: "Boring calls" → "Turn them fun!"
+- Screenshot 2: "Hard to start?" → "Join in seconds"
+
+**Aspiration → Achievement:**
+- Screenshot 3: "Want connection?" → "Laugh together, anywhere"
+- Screenshot 5: "Want excitement?" → "Feel the thrill!"
+
+**Fear → Relief:**
+- Screenshot 6: "Worried about cost?" → "Free forever, no tricks"
+
 **Text Overlay Best Practices:**
-- Font: SF Pro (Apple's system font) or Avenir
-- Size: 60-80pt for main text, 30-40pt for subtext
-- Color: White text with 50% dark overlay background
-- Position: Top third or bottom third (don't cover face)
-- Language: English primary, consider Chinese version too
+- Font: SF Pro Display Bold (Apple's system font) or Avenir Next Bold
+- Main Caption Size: 60-80pt (bold, white)
+- Subtitle Size: 32-42pt (medium weight, white or light gray)
+- Color: White text with 60-70% dark gradient overlay
+- Position: Top 25% (main caption) + Bottom 25% (subtitle) - keep middle clear
+- Contrast: Ensure 4.5:1 contrast ratio for accessibility
+- Length: Max 5 words for main, 6 words for subtitle
+- Language: English primary, consider Chinese version for cultural screenshots
+- Alignment: Center-aligned for impact
+- Letter Spacing: Slightly increased (+2-5%) for readability
+
+**Feature vs. Benefit: Quick Comparison**
+
+| Feature (Weak ❌) | Benefit (Strong ✅) |
+|------------------|-------------------|
+| "SharePlay Support" | "Turn Video Calls Into Fun!" |
+| "Real-Time Multiplayer" | "Laugh Together, Anywhere" |
+| "Easy to Use" | "Join in Seconds" |
+| "Hongbao Theme" | "Share Your Heritage" |
+| "Celebration Effects" | "Feel the Thrill of Victory!" |
+| "No In-App Purchases" | "Pure Fun, Zero Strings" |
+
+**User Benefit Categories:**
+
+1. **Emotional Benefits** (Most Powerful)
+   - Connection: "Bring family together"
+   - Joy: "Make everyone smile"
+   - Pride: "Share your culture"
+   - Excitement: "Feel the thrill"
+
+2. **Practical Benefits**
+   - Time: "Ready in seconds"
+   - Ease: "Everyone can play"
+   - Access: "From anywhere"
+
+3. **Social Benefits**
+   - Bonding: "Create memories"
+   - Inclusion: "Grandma plays too"
+   - Distance: "Miles don't matter"
+
+4. **Peace of Mind**
+   - Cost: "Free forever"
+   - Privacy: "Your data stays yours"
+   - Trust: "No hidden tricks"
+
+**How to Create Your Screenshots:**
+
+1. **Capture Gameplay:**
+   - Run app on iPhone 15 Pro Max (6.7" display)
+   - Use Command + Shift + 4 on Mac (if using Simulator)
+   - Or use iPhone screenshot (Volume Up + Side Button)
+   - Ensure resolution: 1290 x 2796 pixels
+
+2. **Add Captions in Canva (Easiest):**
+   - Go to Canva.com → "Custom Size" → 1290 x 2796 px
+   - Upload your screenshot as background
+   - Add text elements:
+     * Top: Main caption (80pt, white, bold, drop shadow)
+     * Bottom: Subtitle (40pt, white, medium, drop shadow)
+   - Add dark gradient overlay (black to transparent, 60% opacity)
+   - Download as PNG (high quality)
+
+3. **Add Captions in Photoshop/Figma:**
+   - Import screenshot (1290 x 2796 px)
+   - Add rectangle layer with black gradient (top/bottom)
+   - Add text layers with SF Pro Display font
+   - Apply drop shadow for readability
+   - Export at 2x resolution
+
+4. **Verify Readability:**
+   - View at actual size on your iPhone
+   - Can you read it in 2 seconds? ✅
+   - Does it make you want to download? ✅
+   - Is the benefit clear? ✅
+
+**Screenshot Naming Convention:**
+```
+Screenshot1_HeroFun_6.7inch.png
+Screenshot2_EasyJoin_6.7inch.png
+Screenshot3_Connection_6.7inch.png
+Screenshot4_Cultural_6.7inch.png
+Screenshot5_Victory_6.7inch.png
+Screenshot6_FreeFun_6.7inch.png
+```
+
+Then create 5.5" versions (1242 x 2208 px) with same captions.
 
 **Optional but recommended:**
 - iPad Pro 12.9" (2nd/3rd/4th/5th/6th gen)
@@ -974,15 +1114,16 @@ GitHub: https://github.com/imentos/GrabRedEnvelope
 
 ### 4. Create ASO-Optimized Screenshots
    - [ ] Run on iPhone 15 Pro Max (6.7" - 1290x2796)
-   - [ ] Add text overlays emphasizing benefits:
-     * Screenshot 1: "Play with Friends on FaceTime"
-     * Screenshot 2: "Start SharePlay in Seconds"
-     * Screenshot 3: "Grab Lucky Red Envelopes"
-     * Screenshot 4: "Compete for Prizes"
-     * Screenshot 5: "Celebrate Your Wins"
-     * Screenshot 6: "Family Fun for All Ages"
-   - [ ] Use same screenshots for 5.5" (resized to 1242x2208)
-   - [ ] Consider adding captions in Chinese for cultural appeal
+   - [ ] Add benefit-focused text overlays (see screenshot strategy above):
+     * Screenshot 1: "Turn Video Calls Into Fun!" / "Make Every FaceTime Memorable"
+     * Screenshot 2: "Join in Seconds" / "No Setup • Everyone Can Play"
+     * Screenshot 3: "Laugh Together, Anywhere" / "Connect Family Across Any Distance"
+     * Screenshot 4: "Share Your Heritage" / "Hongbao Tradition for Modern Families"
+     * Screenshot 5: "Feel the Thrill of Victory!" / "Epic Celebrations for Big Wins"
+     * Screenshot 6: "Pure Fun, Zero Strings" / "Free Forever • No Ads • No Tricks"
+   - [ ] Use Canva, Figma, or Photoshop for text overlays
+   - [ ] Create 5.5" versions (1242x2208) with same captions
+   - [ ] Verify readability on actual device
 
 ### 5. Host Privacy Policy
    - [x] Privacy policy created ✅ **PRIVACY_POLICY.md**
