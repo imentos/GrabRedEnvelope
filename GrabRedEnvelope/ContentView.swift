@@ -74,16 +74,6 @@ struct LobbyView: View {
                 Text("抢红包")
                     .font(.system(size: 24, weight: .medium))
                     .foregroundColor(.white.opacity(0.9))
-                
-                // Debug mode indicator
-                if isDebugMode {
-                    Text("🐛 DEBUG MODE")
-                        .font(.caption)
-                        .foregroundColor(.yellow)
-                        .padding(4)
-                        .background(Color.black.opacity(0.5))
-                        .cornerRadius(4)
-                }
             }
             
             // Players list
@@ -151,22 +141,6 @@ struct LobbyView: View {
             
             // Action buttons
             VStack(spacing: 16) {
-                // Solo Play button (always available in debug mode)
-                if isDebugMode {
-                    Button(action: {
-                        sharePlayService.spawnEnvelopes()
-                    }) {
-                        Text("🐛 Start Solo Game")
-                            .font(.system(size: 20, weight: .semibold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.green)
-                            .cornerRadius(16)
-                    }
-                    .padding(.horizontal, 40)
-                }
-                
                 if !sharePlayService.isConnected && !isDebugMode {
                     VStack(spacing: 8) {
                         HStack(spacing: 4) {
@@ -199,29 +173,6 @@ struct LobbyView: View {
                 
                 // Start Game button - shown for all players
                 if sharePlayService.gameState.players.count >= 1 {
-                    
-                    // Debug info (only shown in debug mode)
-                    if isDebugMode {
-                        VStack(spacing: 4) {
-                            Text("🐛 Debug Info:")
-                                .font(.caption2)
-                                .foregroundColor(.yellow)
-                            Text("Players: \(sharePlayService.gameState.players.count)")
-                                .font(.caption2)
-                                .foregroundColor(.white)
-                            Text("LocalPlayer: \(sharePlayService.localPlayer?.nickname ?? "nil")")
-                                .font(.caption2)
-                                .foregroundColor(.white)
-                            Text("IsHost: \(sharePlayService.localPlayer?.isHost ?? false)")
-                                .font(.caption2)
-                                .foregroundColor(.white)
-                        }
-                        .padding(8)
-                        .background(Color.black.opacity(0.5))
-                        .cornerRadius(8)
-                        .padding(.bottom, 8)
-                    }
-                    
                     // Show warning if not enough players
                     if sharePlayService.gameState.players.count < 2 && !isDebugMode {
                         Text("⚠️ Need at least 2 players to start")
