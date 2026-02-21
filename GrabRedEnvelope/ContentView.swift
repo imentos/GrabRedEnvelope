@@ -11,7 +11,8 @@ import AVFoundation
 struct ContentView: View {
     @StateObject private var sharePlayService = SharePlayService()
     @State private var debugTapCount = 0
-    @State private var isDebugMode = false
+    @State private var isSoloMode = false
+    @State private var lastTapTime: Date = Date.distantPast
     
     var body: some View {
         ZStack {
@@ -21,34 +22,55 @@ struct ContentView: View {
             
             switch sharePlayService.gameState.gamePhase {
             case .lobby:
-                LobbyView(sharePlayService: sharePlayService, isDebugMode: $isDebugMode)
+                LobbyView(
+                    sharePlayService: sharePlayService, 
+                    isSoloMode: $isSoloMode,
+                    onDebugTap: handleDebugTap
+                )
             case .spawning, .active:
                 GameView(sharePlayService: sharePlayService)
             case .results:
                 ResultsView(sharePlayService: sharePlayService)
             }
         }
-        .onTapGesture(count: 1) {
-            handleDebugTap()
-        }
     }
     
     private func handleDebugTap() {
-        debugTapCount += 1
+        let now = Date()
         
-        // Reset counter after 2 seconds
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            debugTapCount = 0
+        // Debounce: Ignore taps within 0.2 seconds of the last tap
+        if now.timeIntervalSince(lastTapTime) < 0.2 {
+            print("⏭️ Tap ignored (debounce)")
+            return
         }
         
-        // Enable debug mode after 5 taps
+        lastTapTime = now
+        debugTapCount += 1
+        print("👆 Tap \(debugTapCount)/5")
+        
+        // Reset counter after 2 seconds of inactivity
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            if Date().timeIntervalSince(self.lastTapTime) >= 2 {
+                self.debugTapCount = 0
+            }
+        }
+        
+        // Toggle FaceTime simulation after 5 taps
         if debugTapCount >= 5 {
-            isDebugMode.toggle()
             debugTapCount = 0
             
-            if isDebugMode {
-                // Create a solo player in debug mode
-                sharePlayService.enableDebugMode()
+            if !isSoloMode {
+                // Enter FaceTime simulation mode - start with ON
+                isSoloMode = true
+                sharePlayService.isSoloMode = true
+                sharePlayService.isFaceTimeAvailable = true
+                print("🛠️ FaceTime Simulator: ON (Shows Multiplayer button)")
+            } else {
+                // Toggle simulated FaceTime status
+                sharePlayService.isFaceTimeAvailable.toggle()
+                print(sharePlayService.isFaceTimeAvailable 
+                    ? "🛠️ FaceTime Simulator: ON (Shows Multiplayer button)" 
+                    : "🛠️ FaceTime Simulator: OFF (Shows Solo button)")
             }
         }
     }
@@ -58,14 +80,23 @@ struct ContentView: View {
 
 struct LobbyView: View {
     @ObservedObject var sharePlayService: SharePlayService
-    @Binding var isDebugMode: Bool
+    @Binding var isSoloMode: Bool
+    let onDebugTap: () -> Void
     
     var body: some View {
-        VStack(spacing: 30) {
-            // Title
-            VStack(spacing: 10) {
-                Text("🧧")
-                    .font(.system(size: 100))
+        ZStack {
+            // Tap capture layer - captures all taps in lobby
+            Color.clear
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    onDebugTap()
+                }
+            
+            VStack(spacing: 30) {
+                // Title
+                VStack(spacing: 10) {
+                    Text("🧧")
+                        .font(.system(size: 100))
                 
                 Text("Grab Red Envelopes")
                     .font(.system(size: 32, weight: .bold))
@@ -116,19 +147,27 @@ struct LobbyView: View {
             
             Spacer()
             
-            // SharePlay Instructions (when not connected and not in debug mode)
-            if !sharePlayService.isConnected && !isDebugMode && sharePlayService.gameState.players.isEmpty {
+            // Game Instructions (always show in lobby)
+            if !sharePlayService.isConnected {
                 VStack(spacing: 16) {
                     Text("How to Play")
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(.white)
                     
                     VStack(spacing: 12) {
-                        InstructionRow(number: "1", text: "Start a FaceTime call with friends")
-                        InstructionRow(number: "2", text: "Tap 'Start SharePlay' button below")
-                        InstructionRow(number: "3", text: "Everyone taps 'Join' on their devices")
-                        InstructionRow(number: "4", text: "Host starts the game when ready")
-                        InstructionRow(number: "5", text: "Race to grab red envelopes! 🧧")
+                        if sharePlayService.isFaceTimeAvailable {
+                            // SharePlay multiplayer instructions
+                            InstructionRow(number: "1", text: "Start a FaceTime call with friends")
+                            InstructionRow(number: "2", text: "Tap 'Play with Friends' button below")
+                            InstructionRow(number: "3", text: "Everyone taps 'Join' on their devices")
+                            InstructionRow(number: "4", text: "Host starts the game when ready")
+                            InstructionRow(number: "5", text: "Race to grab red envelopes! 🧧")
+                        } else {
+                            // Solo play instructions
+                            InstructionRow(number: "1", text: "Tap red envelopes as fast as you can!")
+                            InstructionRow(number: "2", text: "Each envelope contains random coins")
+                            InstructionRow(number: "3", text: "Collect the most coins to win! 🧧")
+                        }
                     }
                     .padding()
                     .background(Color.white.opacity(0.1))
@@ -141,40 +180,67 @@ struct LobbyView: View {
             
             // Action buttons
             VStack(spacing: 16) {
-                if !sharePlayService.isConnected && !isDebugMode {
-                    VStack(spacing: 8) {
-                        HStack(spacing: 4) {
-                            Image(systemName: "phone.fill")
-                                .foregroundColor(.white.opacity(0.7))
-                            Text("Make sure you're on a FaceTime call first")
-                                .foregroundColor(.white.opacity(0.7))
+                if !sharePlayService.isConnected {
+                    // Show appropriate button based on FaceTime status
+                    if sharePlayService.isFaceTimeAvailable {
+                        // FaceTime is active - show multiplayer only
+                        VStack(spacing: 8) {
+                            Text("✅ FaceTime call detected!")
+                                .font(.caption)
+                                .foregroundColor(.green)
+                                .padding(.bottom, 4)
+                            
+                            Button(action: {
+                                Task {
+                                    await sharePlayService.startSharePlay()
+                                }
+                            }) {
+                                HStack {
+                                    Image(systemName: "shareplay")
+                                    Text("Play with Friends")
+                                }
+                                .font(.system(size: 20, weight: .semibold))
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.green)
+                                .cornerRadius(16)
+                            }
+                            .padding(.horizontal, 40)
                         }
-                        .font(.caption)
-                        
-                        Button(action: {
-                            Task {
-                                await sharePlayService.startSharePlay()
+                    } else {
+                        // No FaceTime - show solo play only
+                        VStack(spacing: 8) {
+                            Button(action: {
+                                sharePlayService.enableSoloMode()
+                                SoundManager.shared.playGameStart()
+                            }) {
+                                HStack {
+                                    Image(systemName: "person.fill")
+                                    Text("Play Solo")
+                                }
+                                .font(.system(size: 20, weight: .semibold))
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.blue)
+                                .cornerRadius(16)
                             }
-                        }) {
-                            HStack {
-                                Image(systemName: "shareplay")
-                                Text("Start SharePlay")
-                            }
-                            .font(.system(size: 20, weight: .semibold))
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.green)
-                            .cornerRadius(16)
+                            .padding(.horizontal, 40)
+                            
+                            Text("💡 Start a FaceTime call to play with friends")
+                                .font(.caption)
+                                .foregroundColor(.white.opacity(0.7))
+                                .multilineTextAlignment(.center)
+                                .padding(.top, 8)
                         }
                     }
-                    .padding(.horizontal, 40)
                 }
                 
                 // Start Game button - shown for all players
                 if sharePlayService.gameState.players.count >= 1 {
                     // Show warning if not enough players
-                    if sharePlayService.gameState.players.count < 2 && !isDebugMode {
+                    if sharePlayService.gameState.players.count < 2 && !isSoloMode {
                         Text("⚠️ Need at least 2 players to start")
                             .font(.caption)
                             .foregroundColor(.yellow)
@@ -182,7 +248,7 @@ struct LobbyView: View {
                     }
                     
                     // Show waiting message for non-hosts
-                    if sharePlayService.localPlayer?.isHost != true && !isDebugMode {
+                    if sharePlayService.localPlayer?.isHost != true && !isSoloMode {
                         Text("⏳ Waiting for host to start the game...")
                             .font(.caption)
                             .foregroundColor(.white.opacity(0.7))
@@ -204,15 +270,28 @@ struct LobbyView: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background((sharePlayService.localPlayer?.isHost == true || isDebugMode) && (sharePlayService.gameState.players.count >= 2 || isDebugMode) ? Color.green : Color.gray)
+                            .background((sharePlayService.localPlayer?.isHost == true || isSoloMode) && (sharePlayService.gameState.players.count >= 2 || isSoloMode) ? Color.green : Color.gray)
                             .cornerRadius(16)
                     }
-                    .disabled((sharePlayService.localPlayer?.isHost != true && !isDebugMode) || (sharePlayService.gameState.players.count < 2 && !isDebugMode))
+                    .disabled((sharePlayService.localPlayer?.isHost != true && !isSoloMode) || (sharePlayService.gameState.players.count < 2 && !isSoloMode))
                     .padding(.horizontal, 40)
                 }
             }
+            }
+            .padding()
+            .task {
+                // Check FaceTime availability when view appears
+                await sharePlayService.checkFaceTimeAvailability()
+            }
+            .onAppear {
+                // Periodically check FaceTime status
+                Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { _ in
+                    Task {
+                        await sharePlayService.checkFaceTimeAvailability()
+                    }
+                }
+            }
         }
-        .padding()
     }
 }
 
@@ -403,8 +482,8 @@ struct ResultsView: View {
             
             Spacer()
             
-            // Play again button for host
-            if sharePlayService.localPlayer?.isHost == true {
+            // Play again button for host or solo mode
+            if sharePlayService.localPlayer?.isHost == true || sharePlayService.isSoloMode {
                 Button(action: {
                     SoundManager.shared.playGameStart()
                     sharePlayService.startNewRound()

@@ -14,7 +14,8 @@ class SharePlayService: ObservableObject {
     @Published var gameState: GameState = GameState()
     @Published var isConnected: Bool = false
     @Published var localPlayer: Player?
-    @Published var isDebugMode: Bool = false
+    @Published var isSoloMode: Bool = false
+    @Published var isFaceTimeAvailable: Bool = false
     
     private var session: GroupSession<RedEnvelopeActivity>?
     private var messenger: GroupSessionMessenger?
@@ -45,6 +46,12 @@ class SharePlayService: ObservableObject {
             // Store local participant ID for host determination
             self.localParticipantID = session.localParticipant.id
             print("🆔 Local participant ID: \(session.localParticipant.id)")
+            
+            // End solo game if running - SharePlay is the main mode
+            if self.isSoloMode {
+                print("🔄 Ending solo game to start SharePlay session")
+                self.exitSoloMode()
+            }
             
             session.$state
                 .sink { [weak self] state in
@@ -421,8 +428,8 @@ class SharePlayService: ObservableObject {
     
     // MARK: - Game Actions
     
-    func enableDebugMode() {
-        isDebugMode = true
+    func enableSoloMode() {
+        isSoloMode = true
         
         // Create 5 mock players for layout testing
         let player1 = Player(
@@ -461,26 +468,78 @@ class SharePlayService: ObservableObject {
         )
         
         localPlayer = player1
-        gameState.players = [player1, player2]//, player3, player4, player5]
+        gameState.players = [player1, player2, player3, player4, player5]
         isConnected = true  // Pretend connected
     }
     
+    func exitSoloMode() {
+        guard isSoloMode else {
+            return // Already exited
+        }
+        
+        isSoloMode = false
+        isConnected = false
+        localPlayer = nil
+        gameState.players.removeAll()
+        gameState.envelopes.removeAll()
+        gameState.gamePhase = .lobby
+        print("🚪 Exited solo mode, returning to lobby")
+    }
+    
+    func checkFaceTimeAvailability() async {
+        // Skip check if already in SharePlay session
+        guard session == nil && !isConnected else {
+            return
+        }
+        
+        let activity = RedEnvelopeActivity()
+        let result = await activity.prepareForActivation()
+        
+        let wasAvailable = isFaceTimeAvailable
+        
+        switch result {
+        case .activationPreferred:
+            isFaceTimeAvailable = true
+        case .activationDisabled, .cancelled:
+            isFaceTimeAvailable = false
+        @unknown default:
+            isFaceTimeAvailable = false
+        }
+        
+        print("📞 FaceTime availability: \(isFaceTimeAvailable)")
+        
+        // If FaceTime becomes available during solo mode, auto-exit to lobby
+        if !wasAvailable && isFaceTimeAvailable && isSoloMode {
+            print("🔄 FaceTime detected! Auto-exiting solo mode to show SharePlay option")
+            exitSoloMode()
+        }
+    }
+    
     func startSharePlay() async {
+        // Prevent duplicate activation if already connected or connecting
+        guard session == nil && !isConnected else {
+            print("⚠️ SharePlay already active or connecting, skipping activation")
+            return
+        }
+        
         do {
             let activity = RedEnvelopeActivity()
             
             switch await activity.prepareForActivation() {
             case .activationPreferred:
                 try await activity.activate()
+                print("✅ SharePlay activation requested")
             case .activationDisabled:
+                print("⚠️ SharePlay activation disabled - FaceTime not active")
                 break
             case .cancelled:
+                print("⚠️ SharePlay activation cancelled by user")
                 break
             @unknown default:
                 break
             }
         } catch {
-            print("Failed to start SharePlay: \(error)")
+            print("❌ Failed to start SharePlay: \(error)")
         }
     }
     
@@ -489,17 +548,17 @@ class SharePlayService: ObservableObject {
         print("🎮 spawnEnvelopes called")
         print("   localPlayer: \(localPlayer?.nickname ?? "nil")")
         print("   localPlayer.isHost: \(localPlayer?.isHost ?? false)")
-        print("   isDebugMode: \(isDebugMode)")
+        print("   isSoloMode: \(isSoloMode)")
         print("   players.count: \(gameState.players.count)")
         print("   All players: \(gameState.players.map { "\($0.nickname) (Host: \($0.isHost))" }.joined(separator: ", "))")
         
-        guard localPlayer?.isHost == true || isDebugMode else {
+        guard localPlayer?.isHost == true || isSoloMode else {
             print("⚠️ Non-host tried to spawn envelopes - rejected")
             return
         }
         
         // Check minimum players
-        if gameState.players.count < 2 && !isDebugMode {
+        if gameState.players.count < 2 && !isSoloMode {
             print("⚠️ Need at least 2 players to start game (current: \(gameState.players.count))")
             return
         }
@@ -547,8 +606,8 @@ class SharePlayService: ObservableObject {
         gameState.envelopes.append(contentsOf: newEnvelopes)
         gameState.gamePhase = .active
         
-        // Broadcast to others (skip in debug mode)
-        if !isDebugMode {
+        // Broadcast to others (skip in solo mode)
+        if !isSoloMode {
             Task {
                 do {
                     try await messenger?.send(GameMessage.envelopeSpawned(newEnvelopes))
@@ -572,8 +631,8 @@ class SharePlayService: ObservableObject {
         
         print("🎯 Claiming envelope \(envelope.id)")
         
-        // Send claim to host (skip in debug mode)
-        if !isDebugMode {
+        // Send claim to host (skip in solo mode)
+        if !isSoloMode {
             let timestamp = Date()
             Task {
                 try? await messenger?.send(
@@ -615,8 +674,8 @@ class SharePlayService: ObservableObject {
            let playerIndex = gameState.players.firstIndex(where: { $0.id == claimedBy }) {
             gameState.players[playerIndex].totalCoins += coins
             
-            // Broadcast (skip in debug mode)
-            if !isDebugMode {
+            // Broadcast (skip in solo mode)
+            if !isSoloMode {
                 Task {
                     try? await messenger?.send(
                         GameMessage.envelopeOpened(envelopeId: envelope.id, coins: coins)
@@ -625,8 +684,8 @@ class SharePlayService: ObservableObject {
             }
         }
         
-        // Check if all envelopes are opened, then automatically show results (host or debug mode only)
-        if localPlayer?.isHost == true || isDebugMode {
+        // Check if all envelopes are opened, then automatically show results (host or solo mode only)
+        if localPlayer?.isHost == true || isSoloMode {
             let allOpened = gameState.envelopes.allSatisfy { $0.state == .opened }
             if allOpened && !gameState.envelopes.isEmpty {
                 print("🎉 All envelopes opened! Showing results...")
@@ -638,14 +697,14 @@ class SharePlayService: ObservableObject {
     }
     
     func startNewRound() {
-        guard localPlayer?.isHost == true || isDebugMode else { return }
+        guard localPlayer?.isHost == true || isSoloMode else { return }
         
         gameState.envelopes.removeAll()
         gameState.gamePhase = .spawning
         gameState.roundNumber += 1
         
-        // Broadcast (skip in debug mode)
-        if !isDebugMode {
+        // Broadcast (skip in solo mode)
+        if !isSoloMode {
             Task {
                 try? await messenger?.send(GameMessage.startRound)
             }
@@ -658,11 +717,11 @@ class SharePlayService: ObservableObject {
     }
     
     func showResults() {
-        guard localPlayer?.isHost == true || isDebugMode else { return }
+        guard localPlayer?.isHost == true || isSoloMode else { return }
         
         gameState.gamePhase = .results
         
-        if !isDebugMode {
+        if !isSoloMode {
             Task {
                 try? await messenger?.send(GameMessage.showResults)
             }
@@ -673,7 +732,7 @@ class SharePlayService: ObservableObject {
     
     func cleanup() {
         // Notify others that this player is leaving
-        if let localPlayer = localPlayer, !isDebugMode {
+        if let localPlayer = localPlayer, !isSoloMode {
             Task {
                 try? await messenger?.send(GameMessage.playerLeft(localPlayer.id))
             }
