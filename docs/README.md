@@ -51,8 +51,8 @@ Use these URLs in your App Store Connect submission:
 Before going live, update these placeholders:
 
 - **Email address** in both privacy.html and support.html:
-  - Current: `your-email@example.com`
-  - Replace with your actual support email
+  - Current: `imentos@gmail.com`
+  - ✅ Updated with actual support email
 
 ## Design
 
