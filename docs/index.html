@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Grab Red Envelope - SharePlay multiplayer game for FaceTime">
+    <title>Grab Red Envelope</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .tagline {
+            color: #666;
+            font-size: 1.2em;
+        }
+        .features {
+            margin: 40px 0;
+        }
+        .feature {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .feature h3 {
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .button.secondary {
+            background: #6c757d;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="icon">🧧</div>
+            <h1>Grab Red Envelope</h1>
+            <p class="tagline">Race to grab red envelopes with friends over FaceTime!</p>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <h3>🎮 SharePlay Multiplayer</h3>
+                <p>Play with friends during FaceTime calls using Apple's SharePlay technology. No room codes, no servers - just pure fun!</p>
+            </div>
+
+            <div class="feature">
+                <h3>🎯 Fast-Paced Action</h3>
+                <p>Tap quickly to grab red envelopes before your friends do. Race against others to collect the most coins!</p>
+            </div>
+
+            <div class="feature">
+                <h3>🔒 100% Private</h3>
+                <p>We don't collect any data. All game synchronization happens peer-to-peer through Apple's secure infrastructure.</p>
+            </div>
+
+            <div class="feature">
+                <h3>👨‍👩‍👧‍👦 Play Solo or Together</h3>
+                <p>Play alone for practice or join friends on FaceTime for real-time multiplayer action!</p>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a href="https://apps.apple.com/app/grabredenvelope" class="button">Download on App Store</a>
+            <a href="privacy.html" class="button secondary">Privacy Policy</a>
+            <a href="support.html" class="button secondary">Support</a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 Grab Red Envelope. All rights reserved.</p>
+            <p>
+                <a href="https://github.com/imentos/GrabRedEnvelope">View on GitHub</a> •
+                <a href="mailto:your-email@example.com">Contact</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
