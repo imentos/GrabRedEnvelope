@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings - English
+  GrabRedEnvelope
+*/
+
+/* App Display Name */
+CFBundleDisplayName = "Grab Red Envelopes";
+CFBundleName = "Grab Red Envelopes";
+
+/* Permissions */
+NSUserNotificationsUsageDescription = "Enable notifications to get game updates during SharePlay sessions";

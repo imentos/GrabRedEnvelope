@@ -1,0 +1,56 @@
+/* Localizable.strings - English */
+
+/* App Title */
+"app.title" = "Grab Red Envelopes";
+"app.title.chinese" = "抢红包";
+
+/* Lobby Screen */
+"lobby.players.title" = "Players (%d)";
+"lobby.player.you" = "(You)";
+"lobby.player.host" = "(Host)";
+"lobby.howto.title" = "How to Play";
+
+/* Instructions - Multiplayer */
+"instructions.multiplayer.step1" = "Start a FaceTime call with friends";
+"instructions.multiplayer.step2" = "Tap 'Play with Friends' button below";
+"instructions.multiplayer.step3" = "Everyone taps 'Join' on their devices";
+"instructions.multiplayer.step4" = "Host starts the game when ready";
+"instructions.multiplayer.step5" = "Race to grab red envelopes! 🧧";
+
+/* Instructions - Solo */
+"instructions.solo.step1" = "Tap red envelopes as fast as you can!";
+"instructions.solo.step2" = "Each envelope contains random coins";
+"instructions.solo.step3" = "Collect the most coins to win! 🧧";
+
+/* Buttons */
+"button.play_friends" = "Play with Friends";
+"button.play_solo" = "Play Solo";
+"button.start_game" = "Start Game!";
+"button.play_again" = "Play Again";
+"button.back_to_lobby" = "Back to Lobby";
+
+/* Status Messages */
+"status.facetime_detected" = "✅ FaceTime call detected!";
+"status.facetime_hint" = "💡 Start a FaceTime call to play with friends";
+"status.need_players" = "⚠️ Need at least 2 players to start";
+"status.waiting_host" = "Waiting for host to start...";
+"status.waiting_players" = "Waiting for more players to join...";
+
+/* Game Phase Messages */
+"game.get_ready" = "Get Ready!";
+"game.tap_to_grab" = "Tap to grab!";
+"game.grab_fast" = "Grab them fast!";
+
+/* Results Screen */
+"results.title" = "Game Over!";
+"results.winner" = "🎉 Winner! 🎉";
+"results.your_score" = "Your Score";
+"results.final_scores" = "Final Scores";
+
+/* SharePlay Activity */
+"shareplay.title" = "🧧 Grab Red Envelopes";
+"shareplay.subtitle" = "Compete to grab red envelopes!";
+
+/* Coins */
+"coins.format" = "%d 💰";
+

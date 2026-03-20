@@ -13,8 +13,8 @@ struct RedEnvelopeActivity: GroupActivity {
     
     var metadata: GroupActivityMetadata {
         var meta = GroupActivityMetadata()
-        meta.title = "🧧 Grab Red Envelopes"
-        meta.subtitle = "Compete to grab red envelopes!"
+        meta.title = String(localized: "shareplay.title")
+        meta.subtitle = String(localized: "shareplay.subtitle")
         meta.type = .generic
         return meta
     }

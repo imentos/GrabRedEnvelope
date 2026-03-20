@@ -98,11 +98,11 @@ struct LobbyView: View {
                     Text("🧧")
                         .font(.system(size: 100))
                 
-                Text("Grab Red Envelopes")
+                Text(String(localized: "app.title"))
                     .font(.system(size: 32, weight: .bold))
                     .foregroundColor(.white)
                 
-                Text("抢红包")
+                Text(String(localized: "app.title.chinese"))
                     .font(.system(size: 24, weight: .medium))
                     .foregroundColor(.white.opacity(0.9))
             }
@@ -110,7 +110,7 @@ struct LobbyView: View {
             // Players list
             if !sharePlayService.gameState.players.isEmpty {
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Players (\(sharePlayService.gameState.players.count))")
+                    Text(String(localized: "lobby.players.title", defaultValue: "Players (\(sharePlayService.gameState.players.count))"))
                         .font(.headline)
                         .foregroundColor(.white)
                     
@@ -120,13 +120,13 @@ struct LobbyView: View {
                                 .foregroundColor(.white)
                             
                             if player.id == sharePlayService.localPlayer?.id {
-                                Text("(You)")
+                                Text(String(localized: "lobby.player.you"))
                                     .font(.caption)
                                     .foregroundColor(.green)
                             }
                             
                             if player.isHost {
-                                Text("(Host)")
+                                Text(String(localized: "lobby.player.host"))
                                     .font(.caption)
                                     .foregroundColor(.yellow)
                             }
@@ -150,23 +150,23 @@ struct LobbyView: View {
             // Game Instructions (always show in lobby)
             if !sharePlayService.isConnected {
                 VStack(spacing: 16) {
-                    Text("How to Play")
+                    Text(String(localized: "lobby.howto.title"))
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(.white)
                     
                     VStack(spacing: 12) {
                         if sharePlayService.isFaceTimeAvailable {
                             // SharePlay multiplayer instructions
-                            InstructionRow(number: "1", text: "Start a FaceTime call with friends")
-                            InstructionRow(number: "2", text: "Tap 'Play with Friends' button below")
-                            InstructionRow(number: "3", text: "Everyone taps 'Join' on their devices")
-                            InstructionRow(number: "4", text: "Host starts the game when ready")
-                            InstructionRow(number: "5", text: "Race to grab red envelopes! 🧧")
+                            InstructionRow(number: "1", text: String(localized: "instructions.multiplayer.step1"))
+                            InstructionRow(number: "2", text: String(localized: "instructions.multiplayer.step2"))
+                            InstructionRow(number: "3", text: String(localized: "instructions.multiplayer.step3"))
+                            InstructionRow(number: "4", text: String(localized: "instructions.multiplayer.step4"))
+                            InstructionRow(number: "5", text: String(localized: "instructions.multiplayer.step5"))
                         } else {
                             // Solo play instructions
-                            InstructionRow(number: "1", text: "Tap red envelopes as fast as you can!")
-                            InstructionRow(number: "2", text: "Each envelope contains random coins")
-                            InstructionRow(number: "3", text: "Collect the most coins to win! 🧧")
+                            InstructionRow(number: "1", text: String(localized: "instructions.solo.step1"))
+                            InstructionRow(number: "2", text: String(localized: "instructions.solo.step2"))
+                            InstructionRow(number: "3", text: String(localized: "instructions.solo.step3"))
                         }
                     }
                     .padding()
@@ -185,7 +185,7 @@ struct LobbyView: View {
                     if sharePlayService.isFaceTimeAvailable {
                         // FaceTime is active - show multiplayer only
                         VStack(spacing: 8) {
-                            Text("✅ FaceTime call detected!")
+                            Text(String(localized: "status.facetime_detected"))
                                 .font(.caption)
                                 .foregroundColor(.green)
                                 .padding(.bottom, 4)
@@ -197,7 +197,7 @@ struct LobbyView: View {
                             }) {
                                 HStack {
                                     Image(systemName: "shareplay")
-                                    Text("Play with Friends")
+                                    Text(String(localized: "button.play_friends"))
                                 }
                                 .font(.system(size: 20, weight: .semibold))
                                 .foregroundColor(.white)
@@ -217,7 +217,7 @@ struct LobbyView: View {
                             }) {
                                 HStack {
                                     Image(systemName: "person.fill")
-                                    Text("Play Solo")
+                                    Text(String(localized: "button.play_solo"))
                                 }
                                 .font(.system(size: 20, weight: .semibold))
                                 .foregroundColor(.white)
@@ -228,7 +228,7 @@ struct LobbyView: View {
                             }
                             .padding(.horizontal, 40)
                             
-                            Text("💡 Start a FaceTime call to play with friends")
+                            Text(String(localized: "status.facetime_hint"))
                                 .font(.caption)
                                 .foregroundColor(.white.opacity(0.7))
                                 .multilineTextAlignment(.center)
@@ -241,7 +241,7 @@ struct LobbyView: View {
                 if sharePlayService.gameState.players.count >= 1 {
                     // Show warning if not enough players
                     if sharePlayService.gameState.players.count < 2 && !isSoloMode {
-                        Text("⚠️ Need at least 2 players to start")
+                        Text(String(localized: "status.need_players"))
                             .font(.caption)
                             .foregroundColor(.yellow)
                             .padding(.bottom, 4)
@@ -265,7 +265,7 @@ struct LobbyView: View {
                         SoundManager.shared.playGameStart()
                         sharePlayService.spawnEnvelopes()
                     }) {
-                        Text("Start Game")
+                        Text(String(localized: "button.start_game"))
                             .font(.system(size: 20, weight: .semibold))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
@@ -464,7 +464,7 @@ struct ResultsView: View {
     
     var body: some View {
         VStack(spacing: 30) {
-            Text("🎉 Results 🎉")
+            Text(String(localized: "results.title"))
                 .font(.system(size: 36, weight: .bold))
                 .foregroundColor(.white)
                 .onAppear {
@@ -488,7 +488,7 @@ struct ResultsView: View {
                     SoundManager.shared.playGameStart()
                     sharePlayService.startNewRound()
                 }) {
-                    Text("Play Again")
+                    Text(String(localized: "button.play_again"))
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)

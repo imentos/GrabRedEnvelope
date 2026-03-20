@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings - Simplified Chinese (简体中文)
+  GrabRedEnvelope
+*/
+
+/* App Display Name */
+CFBundleDisplayName = "抢红包";
+CFBundleName = "抢红包";
+
+/* Permissions */
+NSUserNotificationsUsageDescription = "启用通知以在 SharePlay 游戏中接收更新";

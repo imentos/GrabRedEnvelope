@@ -1,0 +1,56 @@
+/* Localizable.strings - Traditional Chinese */
+
+/* App Title */
+"app.title" = "搶紅包";
+"app.title.chinese" = "Grab Red Envelopes";
+
+/* Lobby Screen */
+"lobby.players.title" = "玩家 (%d)";
+"lobby.player.you" = "(你)";
+"lobby.player.host" = "(主持人)";
+"lobby.howto.title" = "玩法說明";
+
+/* Instructions - Multiplayer */
+"instructions.multiplayer.step1" = "與朋友開始 FaceTime 通話";
+"instructions.multiplayer.step2" = "點擊下方「與朋友一起玩」按鈕";
+"instructions.multiplayer.step3" = "每個人在自己的裝置上點擊「加入」";
+"instructions.multiplayer.step4" = "主持人準備好後開始遊戲";
+"instructions.multiplayer.step5" = "快速搶紅包！🧧";
+
+/* Instructions - Solo */
+"instructions.solo.step1" = "儘可能快地點擊紅包！";
+"instructions.solo.step2" = "每個紅包包含隨機金幣";
+"instructions.solo.step3" = "收集最多金幣獲勝！🧧";
+
+/* Buttons */
+"button.play_friends" = "與朋友一起玩";
+"button.play_solo" = "單人遊戲";
+"button.start_game" = "開始遊戲！";
+"button.play_again" = "再玩一次";
+"button.back_to_lobby" = "返回大廳";
+
+/* Status Messages */
+"status.facetime_detected" = "✅ 偵測到 FaceTime 通話！";
+"status.facetime_hint" = "💡 開始 FaceTime 通話即可與朋友一起玩";
+"status.need_players" = "⚠️ 至少需要2名玩家才能開始";
+"status.waiting_host" = "等待主持人開始...";
+"status.waiting_players" = "等待更多玩家加入...";
+
+/* Game Phase Messages */
+"game.get_ready" = "準備好！";
+"game.tap_to_grab" = "點擊搶紅包！";
+"game.grab_fast" = "快速搶！";
+
+/* Results Screen */
+"results.title" = "遊戲結束！";
+"results.winner" = "🎉 贏家！🎉";
+"results.your_score" = "你的分數";
+"results.final_scores" = "最終分數";
+
+/* SharePlay Activity */
+"shareplay.title" = "🧧 搶紅包";
+"shareplay.subtitle" = "與朋友競賽搶紅包！";
+
+/* Coins */
+"coins.format" = "%d 💰";
+

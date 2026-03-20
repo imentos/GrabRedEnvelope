@@ -91,6 +91,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = B340B9AE2F46810A0090E499;
 			minimizedProjectReferenceProxies = 1;
@@ -267,7 +269,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_DISPLAY_NAME = "Grab Red Envelope";
 				PRODUCT_BUNDLE_IDENTIFIER = rkuo.GrabRedEnvelope;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -304,7 +306,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_DISPLAY_NAME = "Grab Red Envelope";
 				PRODUCT_BUNDLE_IDENTIFIER = rkuo.GrabRedEnvelope;
 				PRODUCT_NAME = "$(TARGET_NAME)";
